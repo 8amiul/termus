@@ -9,6 +9,7 @@
 #define MAX_DIR_LENGTH 256
 
 #define DEFAULT_VOLUME 50
+#define MAX_VOLUME 128
 #define LOOP 0
 
 extern int argc_;

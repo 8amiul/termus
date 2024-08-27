@@ -17,22 +17,22 @@
 */
 void printMusicList(WIN_STRUCT* window, getMusic_STRUCT* getMusicP, int c, int* j, int* highlight, int* old_h1)
 {
-	/* 
-		This if block will refresh the window if screen 
-		size is changed. it has 'old_h1' which helps to get
-		the difference. if 'old_h1' isn't same as current height
-		then it refreshes the windows
-	*/
-	if (*old_h1 != window[1].h)		
-	{
-		*highlight = window[1].h-3;
-		*old_h1 = window[1].h;
-		wrefresh(window[0].win);
-		wrefresh(window[1].win);
-	}
-
 	for (int i = 0; i < window[1].h-2; i++)
 	{
+		/* 
+			This if block will refresh the window if screen 
+			size is changed. it has 'old_h1' which helps to get
+			the difference. if 'old_h1' isn't same as current height
+			then it refreshes the windows.
+			it mainly set the list highlight bar in position if terminal size is changed
+		*/
+		if (*old_h1 != window[1].h)		
+		{
+			*highlight = window[1].h-3;
+			*old_h1 = window[1].h;
+			wrefresh(window[0].win);
+			wrefresh(window[1].win);
+		}
 		/*
 			getting enough space for converting string to wchar_t plus extra one for null char.
 			Allocating space with malloc in wchar_str. Converting char to wchar_t and saving it
@@ -126,7 +126,7 @@ void display(WIN_STRUCT* window, getMusic_STRUCT* getMusicP, Mix_Music* musicSDL
 		int highlight = 0;	// Index number of highlighted text. To get the music it adds 'j' with it to get the actual index in getMusicP->mus[n]
 		int c;				// Manage keystrokes
 		int old_h1 = getmaxy(window[1].win);	// Used to find difference and refresh if display size changes
-		int volume;
+		int volume = DEFAULT_VOLUME;
 		int curPlaying_music = 0;
 		window[0].win = newwin(HEIGHT_0, WIDTH_0, Y_0, X_0);
 		window[1].win = newwin(window[1].h, window[1].w, window[1].y, window[1].x);
@@ -137,7 +137,7 @@ void display(WIN_STRUCT* window, getMusic_STRUCT* getMusicP, Mix_Music* musicSDL
 			int max_x, max_y;
 			getmaxyx(stdscr, max_y, max_x);
 
-			volume = Mix_GetMusicVolume(musicSDL);
+			//volume = Mix_GetMusicVolume(musicSDL);
 
 			clear();
 			wclear(window[0].win);
@@ -165,7 +165,11 @@ void display(WIN_STRUCT* window, getMusic_STRUCT* getMusicP, Mix_Music* musicSDL
 				else
 					mvwprintw(window[0].win, 1, 2, "%s", getMusicP->mus[curPlaying_music].music_file);
 
-				mvwprintw(window[0].win, 2, window[0].w-13, "Vol: %d", volume);
+				if (Mix_GetMusicVolume(musicSDL) != 0)
+					mvwprintw(window[0].win, 2, window[0].w-13, "Vol: %d", volume);
+				else
+					mvwprintw(window[0].win, 2, window[0].w-13, "Vol: [X]");
+
 
 				playbackDuration(window, musicSDL);
 
@@ -181,9 +185,9 @@ void display(WIN_STRUCT* window, getMusic_STRUCT* getMusicP, Mix_Music* musicSDL
 
 				char* x[10] = {"#", "*", "&", "@", "$", "^", "~", "!", "+", "?"};
 				wattron(window[0].win, A_BOLD);
-				mvwprintw(window[0].win, rand() % window[0].h, rand() % window[0].w, x[rand() % 10]);
-				mvwprintw(window[0].win, rand() % window[0].h, rand() % window[0].w, x[rand() % 10]);
-				mvwprintw(window[0].win, rand() % window[0].h, rand() % window[0].w, x[rand() % 10]);
+				mvwprintw(window[0].win, rand() % window[0].h, rand() % window[0].w, "%s", x[rand() % 10]);
+				mvwprintw(window[0].win, rand() % window[0].h, rand() % window[0].w, "%s", x[rand() % 10]);
+				mvwprintw(window[0].win, rand() % window[0].h, rand() % window[0].w, "%s", x[rand() % 10]);
 				wattroff(window[0].win, A_BOLD);
 			}
 

@@ -29,7 +29,7 @@ getMusic_STRUCT* getMusic(void)												// getMusic function gets all the inf
 
 	if (totalMusic == 0)
 	{
-		printf("ERROR: Musice file not found in directories\n");
+		printf("ERROR: Music file not found in directories\n");
 		freeTermus(getmusicVal);
 		exit(1);
 	}

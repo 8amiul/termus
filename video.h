@@ -13,4 +13,4 @@
 #define MAX_BAR_LENGTH 52
 
 #define SEEK 10
-#define SEEK_VOL 10
+#define SEEK_VOL 1

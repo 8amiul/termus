@@ -43,12 +43,12 @@ void controls(int c, int *highlight, int* j, getMusic_STRUCT* getMusicP, WIN_STR
 		if (pos >= SEEK)
 			Mix_SetMusicPosition(pos-SEEK);
 	}
-	if (c == '0')
+	if (c == '0' && *volume != MAX_VOLUME)
 	{
 		*volume += SEEK_VOL;
 		Mix_VolumeMusic(*volume);
 	}
-	if (c == '9')
+	if (c == '9' && *volume != 0)
 	{
 		*volume -= SEEK_VOL;
 		Mix_VolumeMusic(*volume);
@@ -83,7 +83,7 @@ void controls(int c, int *highlight, int* j, getMusic_STRUCT* getMusicP, WIN_STR
 	}
 	if (c == 'm')				//NEED FIX HERE. TODO -> SETUP A MUTE SYSTEM AND SET VOLUME LIMITED TO 100
 	{
-		if (*volume != 0)
+		if (Mix_GetMusicVolume(*musicSDL) != 0)
 			Mix_VolumeMusic(0);
 		else
 			Mix_VolumeMusic(*volume);
