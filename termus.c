@@ -81,7 +81,7 @@ void controls(int c, int *highlight, int* j, getMusic_STRUCT* getMusicP, WIN_STR
 		*musicSDL = Mix_LoadMUS(getMusicP->mus[*curPlaying_music].path);
 		Mix_PlayMusic(*musicSDL, LOOP);
 	}
-	if (c == 'm')				//NEED FIX HERE. TODO -> SETUP A MUTE SYSTEM AND SET VOLUME LIMITED TO 100
+	if (c == 'm')
 	{
 		if (Mix_GetMusicVolume(*musicSDL) != 0)
 			Mix_VolumeMusic(0);
