@@ -17,7 +17,13 @@
 */
 void printMusicList(WIN_STRUCT* window, getMusic_STRUCT* getMusicP, int c, int* j, int* highlight, int* old_h1)
 {
-	for (int i = 0; i < window[1].h-2; i++)
+	int condition = 0;
+	if (getMusicP->totalMusic < window[1].h-2)
+		condition = getMusicP->totalMusic;
+	else
+		condition = window[1].h-2;
+
+	for (int i = 0; i < condition; i++)
 	{
 		/* 
 			This if block will refresh the window if screen 
