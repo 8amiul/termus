@@ -13,8 +13,3 @@ Termus is a terminal based music player written in C using SDL_mixer and ncurses
 ## Used Libraries
 - ```SDL2 & SDL2_mixer```: SDL2_mixer is used for audio and music management
 - ```ncurses```: For displaying windows and text
-
-## About Functions
-```c
-getMusic_STRUCT *getMusic(void);
-```
