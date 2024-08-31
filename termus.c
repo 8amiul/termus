@@ -131,7 +131,8 @@ int help(char* arg)
 {
 	printf("Usage: %s [-h] music-directory\n", arg);
 	printf("\n -h: Displays this message\n");
-	printf("\n KEY_0\t\t\t: Volume up\n"
+	printf("\n KEY_Q\t\t\t: Quit\n"
+		" KEY_0\t\t\t: Volume up\n"
 		" KEY_9\t\t\t: Volume down\n"
 		" KEY_UP & KEY_DOWN\t: Navigate music list\n"
 		" KEY_RIGHT\t\t: Rewind music\n"
